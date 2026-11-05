@@ -16,15 +16,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Java 17 (Temurin)
+      - name: Set up Java 21 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
           cache: 'gradle'
 
       - name: Grant execute permissions for Gradle Wrapper
         run: chmod +x gradlew
+
+      - name: Restore Environment and Keystore
+        run: |
+          # 1. Provide .env from .env.example if not present
+          if [ ! -f .env ]; then
+            cp .env.example .env
+          fi
+
+          # 2. Restore debug.keystore required by signingConfig 'debugConfig'
+          if [ -f debug.keystore.base64 ]; then
+            base64 -d debug.keystore.base64 > debug.keystore
+          else
+            keytool -genkeypair -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          fi
+          ls -lh debug.keystore
 
       - name: Run Unit Tests
         run: ./gradlew testDebugUnitTest --no-daemon
