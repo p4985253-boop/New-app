@@ -1,0 +1,6 @@
+{
+  "name": "SmartSoundBox",
+  "description": "Enterprise-grade UPI payment interceptor and natural voice soundbox announcer",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

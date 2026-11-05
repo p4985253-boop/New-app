@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SmartSoundBox</string>
+    <string name="notification_service_label">SmartSoundBox Payment Interceptor</string>
+    <string name="service_running_title">SmartSoundBox Active</string>
+    <string name="service_running_desc">Listening for UPI payment notifications</string>
+    <string name="channel_soundbox_status">Soundbox Active Status</string>
+    <string name="channel_payment_alerts">Payment Announcements</string>
+</resources>
